@@ -1,0 +1,212 @@
+{
+    "appid": "2d6d5aac-21fc-49a5-9e32-a7260edbe2ea",
+    "name": "Bedrock",
+    "description": "Bedrock LLM Integration",
+    "type": "information",
+    "product_vendor": "Demo",
+    "logo": "bedrock.png",
+    "logo_dark": "bedrock_dark.png",
+    "product_name": "Bedrock LLM Integration",
+    "python_version": "3.13",
+    "product_version_regex": ".*",
+    "publisher": "Demo",
+    "license": "Copyright (c) Demo, 2026",
+    "app_version": "1.0.0",
+    "utctime_updated": "2026-06-22T18:45:29.115543Z",
+    "package_name": "phantom_bedrock",
+    "main_module": "bedrock_connector.py",
+    "min_phantom_version": "8.5.0.248",
+    "app_wizard_version": "1.0.0",
+    "configuration": {
+        "access_key": {
+            "description": "AWS access key ID for the principal allowed to assume the Bedrock role",
+            "data_type": "password",
+            "required": true,
+            "order": 0,
+            "name": "access_key",
+            "id": 0
+        },
+        "secret_key": {
+            "description": "AWS secret access key for the principal allowed to assume the Bedrock role",
+            "data_type": "password",
+            "required": true,
+            "order": 1,
+            "name": "secret_key",
+            "id": 1
+        },
+        "region": {
+            "description": "AWS region where Amazon Bedrock Runtime is available, for example us-east-1",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "",
+            "order": 2,
+            "name": "region",
+            "id": 2
+        },
+        "role_arn": {
+            "description": "IAM role ARN to assume before invoking Bedrock.",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "",
+            "order": 3,
+            "name": "role_arn",
+            "id": 3
+        },
+        "model_id": {
+            "description": "Default Amazon Bedrock model ID, for example us.anthropic.claude-opus-4-6-v1",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "us.anthropic.claude-opus-4-6-v1",
+            "order": 4,
+            "name": "model_id",
+            "id": 4
+        }
+    },
+    "actions": [
+        {
+            "action": "test connectivity",
+            "identifier": "test_connectivity",
+            "description": "Validate the asset configuration for connectivity using supplied configuration",
+            "verbose": "",
+            "type": "test",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "generate text",
+            "identifier": "generate_text",
+            "description": "Send a prompt to the configured Amazon Bedrock LLM and return the generated response",
+            "verbose": "Send a prompt to the configured Amazon Bedrock LLM and return the generated response",
+            "type": "generic",
+            "read_only": true,
+            "parameters": {
+                "prompt": {
+                    "description": "Prompt to send to the Bedrock model",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "prompt"
+                },
+                "model_id": {
+                    "description": "Optional per-action model ID override. If omitted, the asset-level model_id is used",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "us.anthropic.claude-opus-4-6-v1",
+                    "order": 1,
+                    "name": "model_id"
+                },
+                "max_tokens": {
+                    "description": "Maximum response tokens",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "1024",
+                    "order": 2,
+                    "name": "max_tokens"
+                },
+                "temperature": {
+                    "description": "Sampling temperature between 0 and 1",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "0.3",
+                    "order": 3,
+                    "name": "temperature"
+                },
+                "system_prompt": {
+                    "description": "Optional system prompt for supported chat models",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "system_prompt"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.prompt",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "prompt",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.model_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "model_id",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.parameter.max_tokens",
+                    "data_type": "numeric",
+                    "contains": [],
+                    "column_name": "max_tokens",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.parameter.temperature",
+                    "data_type": "numeric",
+                    "contains": [],
+                    "column_name": "temperature",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.parameter.system_prompt",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "system_prompt",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        }
+    ],
+    "pip313_dependencies": {
+        "pypi": [
+            {
+                "module": "boto3"
+            }
+        ]
+    }
+}
